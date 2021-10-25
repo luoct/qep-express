@@ -4,7 +4,7 @@ const db = require('../db/db')
 const md5Hex = require('md5')
 
 const userRouter = require('./user/user')
-const evaluationRouter = require('./user/evaluation')
+const evaluationRouter = require('./evaluation/evaluation')
 
 
 router.use('/user', userRouter)
@@ -98,7 +98,12 @@ router.post('/register', (req, res) => {
             },
             'answers'
         )
-
+        db.insertOne(
+            {
+                stuNo: register.stuNo,
+            },
+            'scores'
+        )
 
     })
 

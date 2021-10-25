@@ -13,7 +13,7 @@ POST http://localhost:3000/api/login
 content-type: application/json
 
 {
-    "username":"zhang3","password":"123"
+    "stuNo":"111","password":"123"
 }
 
 
@@ -25,10 +25,10 @@ POST http://localhost:3000/api/register
 content-type: application/json
 
 {
-    "username":"zhang3",
+    "username":"zhang",
     "password":"123",
     "mobile" : "19900001234",
-    "stuNo": "111"
+    "stuNo": "11123333-"
 }
 
 
@@ -43,7 +43,7 @@ POST http://localhost:3000/api/user/changePassword
 content-type: application/json
 
 {
-    "newPwd":"1232222222-",
+    "newPwd":"12322s22-",
     "stuNo" : "2012623053"
 }
 
@@ -58,7 +58,7 @@ content-type: application/json
     "username":"zhang3sss",
     "mobile" : "19900001234",
     "stuNo" : "111",
-    "signature" : "猪突猛进！!!!"
+    "signature" : "猪突猛进-----------！!!!"
 }
 
 
@@ -74,5 +74,5 @@ content-type: application/json
 
 {
     "answer": [1,0,1,2,1,0],
-    "type": "SAS,
+    "type": "Sssssss-"
 }

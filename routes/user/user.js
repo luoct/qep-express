@@ -10,6 +10,7 @@ router.get('/getInfo', (req, res) => {
             code: 0,
             msg: '获取信息失败',
         })
+        return
     }
     db.find({ stuNo: req.session.stuNo }, 'user', (data) => {
         console.log(data[0])
@@ -35,7 +36,7 @@ router.get('/getInfo', (req, res) => {
 router.post('/changePassword', (req, res) => {
     let newPwd = req.body.newPwd
 
-    // req.session.stuNo = '2012623053'
+    req.session.stuNo = '2012623053'
     if (req.body.stuNo !== req.session.stuNo) {
         console.log('req.query.stuNo !== req.session.stuNo')
         res.json({
@@ -61,11 +62,12 @@ router.post('/changePassword', (req, res) => {
 // 修改个人信息
 router.post('/changeInfo', (req, res) => {
     let changeInfo = req.body
+    req.session.stuNo = '111'
     if (req.body.stuNo !== req.session.stuNo) {
         console.log('req.query.stuNo !== req.session.stuNo')
         res.json({
             code: 0,
-            msg: '修改密码失败',
+            msg: '修改信息失败',
         })
         return
     }
