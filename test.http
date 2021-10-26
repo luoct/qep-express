@@ -13,7 +13,7 @@ POST http://localhost:3000/api/login
 content-type: application/json
 
 {
-    "stuNo":"111","password":"123"
+    "stuNo":"1","password":"1"
 }
 
 
@@ -36,7 +36,8 @@ content-type: application/json
 
 ######
 ######
-GET http://localhost:3000/api/user/getInfo?stuNo=2012623053
+GET http://localhost:3000/api/user/getInfo?stuNo=1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVObyI6IjEiLCJwYXNzd29yZCI6IjEiLCJpYXQiOjE2MzUxNjc2MDcsImV4cCI6MTYzNTI1NDAwN30.Fu1F43_9lr-PPHXBXWHhyk_XHWbELr2YGoJBmAx5_V0
 
 ###
 POST http://localhost:3000/api/user/changePassword

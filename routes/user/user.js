@@ -3,16 +3,18 @@ let router = express.Router()
 let db = require('../../db/db')
 
 router.get('/getInfo', (req, res) => {
-    // req.session.stuNo = '2012623053'
-    if (req.query.stuNo !== req.session.stuNo) {
-        console.log('req.query.stuNo !== req.session.stuNo')
+
+    if (!req.user) {
         res.json({
             code: 0,
             msg: '获取信息失败',
         })
         return
     }
-    db.find({ stuNo: req.session.stuNo }, 'user', (data) => {
+    console.log(req.user)
+    console.log(req.query.stuNo)
+
+    db.find({ stuNo: req.query.stuNo }, 'user', (data) => {
         console.log(data[0])
 
         if (!data[0]) {
@@ -36,16 +38,15 @@ router.get('/getInfo', (req, res) => {
 router.post('/changePassword', (req, res) => {
     let newPwd = req.body.newPwd
 
-    req.session.stuNo = '2012623053'
-    if (req.body.stuNo !== req.session.stuNo) {
-        console.log('req.query.stuNo !== req.session.stuNo')
+    if (!req.user) {
         res.json({
             code: 0,
-            msg: '修改密码失败',
+            msg: '失败',
         })
         return
     }
-    db.updateOne({ 'stuNo': req.session.stuNo }, { 'password': newPwd }, 'user', (data) => {
+
+    db.updateOne({ 'stuNo': req.user.stuNo }, { 'password': newPwd }, 'user', (data) => {
         if (data.result.ok !== 1) {
             res.json({
                 code: 0,
@@ -53,7 +54,6 @@ router.post('/changePassword', (req, res) => {
             })
             return
         }
-        req.session.destroy()
         res.json({ code: 1, msg: '修改密码成功' })
     })
 })
@@ -62,16 +62,16 @@ router.post('/changePassword', (req, res) => {
 // 修改个人信息
 router.post('/changeInfo', (req, res) => {
     let changeInfo = req.body
-    req.session.stuNo = '111'
-    if (req.body.stuNo !== req.session.stuNo) {
-        console.log('req.query.stuNo !== req.session.stuNo')
+
+    if (!req.user) {
         res.json({
             code: 0,
-            msg: '修改信息失败',
+            msg: '失败',
         })
         return
     }
-    db.updateOne({ stuNo: req.session.stuNo },
+
+    db.updateOne({ stuNo: req.user.stuNo },
         {
             username: changeInfo.username,
             signature: changeInfo.signature,

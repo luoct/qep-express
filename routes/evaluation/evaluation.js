@@ -26,20 +26,21 @@ router.get('/getRatingScale', (req, res) => {
 
 router.post('/postAnswer', (req, res) => {
 
-    req.session.stuNo = '11123333-'
     let answer = req.body.answer
     let type = req.body.type
 
     let answerObj = {}
     answerObj[type] = answer
 
+    console.log('answerObj',answerObj)
+    
     db.updateOne(
-        { stuNo: req.session.stuNo },
+        { stuNo: req.user.stuNo },
         answerObj,
         'answers',
         (data) => {
             if (data.result.ok === 1) {
-                res.json({ code: 1, msg: '提交成功', data: { stuNo: req.session.stuNo, score: -1, description: '暂无分数' } })
+                res.json({ code: 1, msg: '提交成功', data: { stuNo: req.user.stuNo, score: -1, description: '暂无分数' } })
             } else {
                 res.json({ code: 0, msg: '提交失败' })
             }
