@@ -13,6 +13,7 @@ const evaluationRouter = require('./evaluation/evaluation')
 
 
 router.post('/login', (req, res) => {
+    console.log('收到post')
     // 拿到登录信息
     let login = req.body
 
@@ -50,20 +51,14 @@ router.post('/login', (req, res) => {
     })
 })
 
-// router.get('/logout', (req, res, next) => {
-//     if (req.session) {
-//         req.session.destroy() // 删除session
-//         res.json({
-//             msg: '登出成功',
-//             code: 1,
-//         })
-//     } else {
-//         res.json({
-//             msg: 'you are not logged in!',
-//             code: 0,
-//         })
-//     }
-// })
+router.get('/logout', (req, res, next) => {
+    
+    res.json({
+        msg: 'logout',
+        code: 1,
+    })
+
+})
 
 
 

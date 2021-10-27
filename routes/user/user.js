@@ -11,11 +11,9 @@ router.get('/getInfo', (req, res) => {
         })
         return
     }
-    console.log(req.user)
-    console.log(req.query.stuNo)
+
 
     db.find({ stuNo: req.query.stuNo }, 'user', (data) => {
-        console.log(data[0])
 
         if (!data[0]) {
             res.json({
@@ -83,7 +81,6 @@ router.post('/changeInfo', (req, res) => {
                 res.json({ code: 0, msg: '修改信息失败' })
                 return
             }
-            console.log('data', data)
             res.json({ code: 1, msg: '修改信息成功' })
         }
     )

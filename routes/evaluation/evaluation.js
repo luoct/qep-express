@@ -32,8 +32,6 @@ router.post('/postAnswer', (req, res) => {
     let answerObj = {}
     answerObj[type] = answer
 
-    console.log('answerObj',answerObj)
-    
     db.updateOne(
         { stuNo: req.user.stuNo },
         answerObj,
@@ -46,10 +44,44 @@ router.post('/postAnswer', (req, res) => {
             }
         }
     )
+
+    let score = computedScore(type, answer)
+    let scoreObj = {}
+    scoreObj[type] = score
+    db.updateOne(
+        { stuNo: req.user.stuNo },
+        scoreObj,
+        'scores'
+    )
+
 })
 
 
-
-
-
 module.exports = router
+
+
+
+// 计算得分的函数
+let computedScore = (type, answerArr) => {
+    let score = 0
+    switch (type) {
+        case 'SAS':
+            answerArr.map((v, index) => {
+                if ([4, 8, 12, 16, 18].indexOf(index) === -1) {
+                    score += (Number(v) + 1)
+                } else {
+                    if (v === 0) score += 4
+                    else if (v === 1) score += 3
+                    else if (v === 2) score += 2
+                    else if (v === 3) score += 1
+                }
+            })
+            score *= 1.25
+            score = Math.round(score)
+            break;
+
+        default:
+            break;
+    }
+    return score
+}
