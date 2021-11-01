@@ -30,11 +30,10 @@ router.post('/postAnswer', (req, res) => {
     let type = req.body.type
     let score = computedScore(type, answer)
 
-    let answerObj = {}
-    answerObj[type] = answer
+
     db.updateOne(
         { stuNo: req.user.stuNo },
-        answerObj,
+        { [type]: answer },
         'answers',
         (data) => {
             if (data.result.ok === 1) {
@@ -46,11 +45,9 @@ router.post('/postAnswer', (req, res) => {
     )
 
 
-    let scoreObj = {}
-    scoreObj[type] = score
     db.updateOne(
         { stuNo: req.user.stuNo },
-        scoreObj,
+        { [type]: score },
         'scores'
     )
 
