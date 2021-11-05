@@ -1,6 +1,8 @@
 const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb://localhost:27017/";
+// const url = "mongodb://localhost:27017/";
+const url = "mongodb://118.31.8.176:27017/";
 const dbName = 'qep'
+
 
 // mongodb+srv://admin:123@start.3fssa.mongodb.net/qep?retryWrites=true&w=majority
 

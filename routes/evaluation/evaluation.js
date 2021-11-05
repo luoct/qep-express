@@ -3,6 +3,25 @@ let router = express.Router()
 let db = require('../../db/db')
 
 
+router.get('/getRatingScaleList', (req, res) => {
+
+    db.find({ }, 'ratingScalesList', (data) => {
+        if (!data[0]) {
+            res.json({
+                code: 0,
+                msg: '获取失败',
+            })
+        } else {
+            res.json({
+                code: 1,
+                msg: '获取成功',
+                data: data
+            })
+        }
+
+    })
+})
+
 router.get('/getRatingScale', (req, res) => {
     let type = req.query.type
 
