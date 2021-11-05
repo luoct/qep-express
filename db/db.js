@@ -4,7 +4,7 @@ const url = "mongodb://118.31.8.176:27017/";
 const dbName = 'qep'
 
 
-// mongodb+srv://admin:123@start.3fssa.mongodb.net/qep?retryWrites=true&w=majority
+// mongodb+srv://admin:<password>@start.3fssa.mongodb.net/qep?retryWrites=true&w=majority
 
 let createCollection = (collectionName) => {
     MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, db) {
