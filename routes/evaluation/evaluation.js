@@ -5,7 +5,7 @@ let db = require('../../db/db')
 
 router.get('/getRatingScaleList', (req, res) => {
 
-    db.find({ }, 'ratingScalesList', (data) => {
+    db.find({}, 'ratingScalesList', (data) => {
         if (!data[0]) {
             res.json({
                 code: 0,
@@ -85,6 +85,28 @@ let computedScore = (type, answerArr) => {
             answerArr.map((v, index) => {
                 if ([4, 8, 12, 16, 18].indexOf(index) === -1) {
                     score += (Number(v) + 1)
+                } else {
+                    if (v === 0) score += 4
+                    else if (v === 1) score += 3
+                    else if (v === 2) score += 2
+                    else if (v === 3) score += 1
+                }
+            })
+            score *= 1.25
+            score = Math.round(score)
+            break;
+        case 'SCL-90':
+            answerArr.map((v, index) => {
+                score += (v + 1)
+            })
+            score = Math.round(score)
+            break;
+
+        case 'SDS':
+            answerArr.map((v, index) => {
+                // [13, 15,19,11,12,14,16,17,18,20].indexOf(index) === -1
+                if (index > 10) {
+                    score += (v + 1)
                 } else {
                     if (v === 0) score += 4
                     else if (v === 1) score += 3
